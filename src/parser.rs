@@ -1,24 +1,5 @@
 use crate::lexer::{Token, Lexer};
-use std::fmt;
-
-#[derive(Debug)]
-pub enum Expr {
-    Number(i64),
-    Identifier(String),
-    BinaryOp(Box<Expr>, String, Box<Expr>),
-    Assignment(String, Box<Expr>), // Add assignment support
-}
-
-impl fmt::Display for Expr {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Expr::Number(n) => write!(f, "{}", n),
-            Expr::Identifier(id) => write!(f, "{}", id),
-            Expr::BinaryOp(lhs, op, rhs) => write!(f, "({} {} {})", lhs, op, rhs),
-            Expr::Assignment(id, expr) => write!(f, "val {} = {}", id, expr),
-        }
-    }
-}
+use crate::expr::Expr;
 
 pub struct Parser<'a> {
     lexer: Lexer<'a>,

@@ -1,29 +1,6 @@
 use std::fs::File;
 use std::io::{self, Write};
-
-#[derive(Debug)]
-pub enum Expr {
-    Number(i64),
-    Identifier(String),
-    BinaryOp(Box<Expr>, String, Box<Expr>),
-    Assignment(String, Box<Expr>),
-}
-
-impl Expr {
-    // Converts the expression into the corresponding Rust code as a string
-    pub fn generate_rust_code(&self) -> String {
-        match self {
-            Expr::Number(n) => n.to_string(),
-            Expr::Identifier(id) => id.clone(),
-            Expr::BinaryOp(lhs, op, rhs) => {
-                format!("{} {} {}", lhs.generate_rust_code(), op, rhs.generate_rust_code())
-            }
-            Expr::Assignment(id, expr) => {
-                format!("let {} = {};", id, expr.generate_rust_code())
-            }
-        }
-    }
-}
+use crate::expr::Expr;
 
 pub fn generate_rust_file(ast: &[Expr], file_path: &str) -> io::Result<()> {
     let mut code = String::new();
