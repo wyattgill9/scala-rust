@@ -10,7 +10,7 @@ fn main() -> std::io::Result<()> {
     let filename = if args.len() > 1 {
         &args[1]
     } else {
-        "input/source.scala"
+        "../input/source.scala"
     };
 
     // Read the source code from the file
@@ -29,7 +29,7 @@ fn main() -> std::io::Result<()> {
     println!("Parsed AST: {:?}", parsed);
 
     // gen
-    let file_path = "output/output.rs";
+    let file_path = "../output/output.rs";
     generate_rust_file(&parsed[..], file_path)?;
 
 
